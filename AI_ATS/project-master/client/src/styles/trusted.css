@@ -1,0 +1,203 @@
+/**
+ * TrustedBy Component Styles
+ * Professional infinite marquee slider with smooth CSS animations
+ * 
+ * Features:
+ * - Smooth, continuous scrolling animation (LTR direction - left to right)
+ * - GPU-accelerated animations for optimal performance
+ * - Responsive spacing and sizing
+ * - Hover effects for enhanced interactivity
+ * - Seamless infinite loop without visible gaps
+ */
+
+/* Container styles - Main wrapper with overflow hidden */
+/* أنماط الحاوية - الحاوية الرئيسية مع إخفاء الفائض */
+.trusted-by-container {
+  position: relative;
+  width: 100%;
+}
+
+/* Marquee wrapper - Creates the visible scrolling area */
+/* حاوية الماركيز - تنشئ منطقة التمرير المرئية */
+.trusted-by-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  /* Gradient overlays for smooth fade-in/out effect at edges */
+  /* طبقات متدرجة لتأثير التلاشي السلس عند الحواف */
+  /* Fallback for browsers that don't support mask-image */
+  /* بديل للمتصفحات التي لا تدعم mask-image */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 5%,
+    black 95%,
+    transparent 100%
+  );
+  mask-mode: alpha;
+  -webkit-mask-mode: alpha;
+}
+
+/* Track container - The animated element that moves */
+/* حاوية المسار - العنصر المتحرك */
+.trusted-by-track {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: fit-content;
+  /* Infinite scroll animation - LTR direction (left to right) */
+  /* حركة التمرير اللا نهائية - اتجاه LTR (من اليسار لليمين) */
+  animation: scroll-infinite 30s linear infinite;
+  /* Enable hardware acceleration for smooth performance */
+  /* تفعيل التسريع العتادي للأداء السلس */
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Individual company logo item */
+/* عنصر شعار الشركة الفردي */
+.trusted-by-item {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  /* Smooth hover transition */
+  /* انتقال سلس عند التحويم */
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Company logo image styling */
+/* أنماط صورة شعار الشركة */
+.trusted-by-logo {
+  height: 2rem;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+  opacity: 0.7;
+  /* Smooth hover transition for interactivity */
+  /* انتقال سلس عند التحويم للتفاعل */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  /* Prevent image drag and selection */
+  /* منع سحب وتحديد الصورة */
+  user-select: none;
+  -webkit-user-drag: none;
+  pointer-events: auto;
+}
+
+/* Hover effect on individual items */
+/* تأثير التحويم على العناصر الفردية */
+.trusted-by-item:hover .trusted-by-logo {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Pause animation on hover for better UX */
+/* إيقاف الحركة عند التحويم لتحسين تجربة المستخدم */
+.trusted-by-marquee:hover .trusted-by-track {
+  animation-play-state: paused;
+}
+
+/**
+ * Infinite scroll animation
+ * Moves content from left to right (LTR) continuously
+ * 
+ * حركة التمرير اللا نهائية
+ * تحرك المحتوى من اليسار لليمين (LTR) بشكل مستمر
+ */
+@keyframes scroll-infinite {
+  0% {
+    /* Start from -50% to show the second duplicate set */
+    /* البدء من -50% لإظهار المجموعة المكررة الثانية */
+    transform: translate3d(-50%, 0, 0);
+  }
+  100% {
+    /* Move to 0% to show the first set, creating left-to-right movement */
+    /* الانتقال إلى 0% لإظهار المجموعة الأولى، مما يخلق حركة من اليسار لليمين */
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* Responsive styles for different screen sizes */
+/* الأنماط المتجاوبة لأحجام الشاشات المختلفة */
+
+/* Small screens (mobile) */
+/* الشاشات الصغيرة (الهاتف المحمول) */
+@media (max-width: 640px) {
+  .trusted-by-track {
+    gap: 1.5rem;
+    animation-duration: 25s;
+  }
+
+  .trusted-by-logo {
+    height: 1.5rem;
+    max-width: 100px;
+  }
+
+  .trusted-by-item {
+    padding: 0.25rem 0.75rem;
+  }
+}
+
+/* Medium screens (tablets) */
+/* الشاشات المتوسطة (الأجهزة اللوحية) */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .trusted-by-track {
+    gap: 1.75rem;
+    animation-duration: 28s;
+  }
+
+  .trusted-by-logo {
+    height: 1.75rem;
+    max-width: 120px;
+  }
+}
+
+/* Large screens (desktop) */
+/* الشاشات الكبيرة (سطح المكتب) */
+@media (min-width: 1025px) {
+  .trusted-by-track {
+    gap: 2rem;
+    animation-duration: 30s;
+  }
+
+  .trusted-by-logo {
+    height: 2rem;
+    max-width: 150px;
+  }
+}
+
+/* Extra large screens */
+/* الشاشات الكبيرة جداً */
+@media (min-width: 1280px) {
+  .trusted-by-logo {
+    height: 2.5rem;
+    max-width: 180px;
+  }
+}
+
+/* Reduced motion preference for accessibility */
+/* تفضيل الحركة المخففة لإمكانية الوصول */
+@media (prefers-reduced-motion: reduce) {
+  .trusted-by-track {
+    animation: none;
+  }
+  
+  .trusted-by-marquee {
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+  }
+  
+  .trusted-by-marquee::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+  }
+}
