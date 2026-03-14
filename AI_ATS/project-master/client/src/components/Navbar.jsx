@@ -62,6 +62,15 @@ const Navbar = () => {
         {user ? (
           <div className="flex items-center gap-4 sm:gap-6 text-gray-700 font-medium">
             <Link
+              to="/ats-checker"
+              className="text-sm sm:text-base hover:text-blue-600 transition-colors"
+            >
+              ATS Checker
+            </Link>
+
+            <span className="hidden sm:block text-gray-300">|</span>
+
+            <Link
               to="/applications"
               className="text-sm sm:text-base hover:text-blue-600 transition-colors"
             >
@@ -82,6 +91,18 @@ const Navbar = () => {
           </div>
         ) : (
           <div className="flex items-center gap-3 sm:gap-5">
+            <button
+              onClick={() =>
+                openSignIn({
+                  forceRedirectUrl: '/ats-checker',
+                  fallbackRedirectUrl: '/ats-checker',
+                })
+              }
+              className="text-sm sm:text-base text-gray-600 hover:text-blue-600 font-medium transition-colors"
+            >
+              ATS Checker
+            </button>
+
             {/* Recruiter */}
             <button
               onClick={() => setShowRecruiterLogin(true)}

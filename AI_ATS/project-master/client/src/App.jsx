@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
-import { Route, Routes } from 'react-router-dom'
+import { Navigate, Route, Routes } from 'react-router-dom'
+import { useUser } from '@clerk/clerk-react'
 import Home from './pages/Home'
 import Applyjob from './pages/ApplyJob'
 import Applications from './pages/Applications'
@@ -17,6 +18,22 @@ import BackToTop from './components/BackToTop' ;
 import AdminDashboard from './pages/AdminDashboard'
 import AdminManageJobs from './pages/AdminManageJobs'
 import AdminManageUsers from './pages/AdminManageUsers'
+import ATSChecker from './pages/ATSChecker'
+import ATSFeedback from './pages/ATSFeedback'
+
+const ProtectedATSChecker = () => {
+  const { user, isLoaded } = useUser()
+
+  if (!isLoaded) {
+    return <div className='pt-24 text-center text-gray-500'>Loading...</div>
+  }
+
+  if (user) {
+    return <ATSChecker />
+  }
+
+  return <Navigate to='/' replace />
+}
 
 
 const App = () => {
@@ -31,6 +48,8 @@ const App = () => {
 
       <Routes>
         <Route path='/' element={<Home/>}/>
+        <Route path='/ats-checker' element={<ProtectedATSChecker/>}/>
+        <Route path='/ats-feedback' element={<ATSFeedback/>}/>
         <Route path='/apply-job/:id' element={<Applyjob/>}/>
         <Route path='/applications' element={<Applications/>}/>
         
